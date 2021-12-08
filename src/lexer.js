@@ -64,7 +64,7 @@ let lexer = new Lexer(tokenList)
 lexer.tokens = tokenList
 lexer.map = _.reduce(
   tokenList,
-  (map, token) => _.assign(map, { [token.tokenName]: token }),
+  (map, token) => _.assign(map, { [token.name]: token }),
   {}
 )
 module.exports = lexer
