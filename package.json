@@ -1,8 +1,11 @@
 {
   "name": "@dextcloud/jsonmatch",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "./src",
   "author": "Pavel Pertsev <morhetz@gmail.com>",
+  "files": [
+    "/src"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },
