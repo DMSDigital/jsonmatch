@@ -46,7 +46,7 @@ class Parser extends CstParser {
     $.RULE("filter", () => {
       $.SUBRULE($.path)
       $.OPTION(() => {
-        $.OR2([
+        $.OR([
           { ALT: () => $.SUBRULE($.matchBoolean) },
           { ALT: () => $.SUBRULE($.matchValue) },
           { ALT: () => $.SUBRULE($.matchSet) },
@@ -86,14 +86,14 @@ class Parser extends CstParser {
           ALT: () => {
             $.CONSUME(map.Dot)
             $.CONSUME(map.Identifier)
-          }
+          },
         },
         {
           ALT: () => {
             $.CONSUME(map.LSquare)
             $.SUBRULE($.literal)
             $.CONSUME(map.RSquare)
-          }
+          },
         },
       ])
     })
@@ -126,13 +126,6 @@ class Parser extends CstParser {
       ])
     })
 
-    $.RULE("logical", () => {
-      $.OR([
-        { ALT: () => $.CONSUME(map.And) },
-        { ALT: () => $.CONSUME(map.Or) },
-      ])
-    })
-
     $.RULE("value", () => {
       $.OR([
         { ALT: () => $.SUBRULE($.literal) },
@@ -162,7 +155,7 @@ class Parser extends CstParser {
         SEP: map.Comma,
         DEF: () => {
           $.SUBRULE($.value, { LABEL: "item" })
-        }
+        },
       })
       $.CONSUME(map.RSquare)
     })
@@ -172,6 +165,5 @@ class Parser extends CstParser {
 }
 
 let parser = new Parser()
-// parser.Visitor = parser.getBaseCstVisitorConstructor()
 
 module.exports = parser

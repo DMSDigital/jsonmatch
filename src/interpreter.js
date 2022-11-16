@@ -1,16 +1,32 @@
 let _ = require("lodash")
 let parser = require("./parser")
-let B = require("./basis")
 
 let Visitor = parser.getBaseCstVisitorConstructor()
 
-let And = B.both
-let Or = B.either
+let findOp = (ctx, map) =>
+  _.reduce(
+    map,
+    (acc, val, key) => {
+      if (!_.isEmpty(acc)) return acc
+      return !!ctx[key] ? [key, val] : []
+    },
+    [],
+  )
+
+let Both = (f, g) =>
+  function _both() {
+    return f.apply(this, arguments) && g.apply(this, arguments)
+  }
+
+let Either = (f, g) =>
+  function _either() {
+    return f.apply(this, arguments) || g.apply(this, arguments)
+  }
 
 let Exists = path => obj => _.has(obj, path)
 
-let Empty = (item, value) => B.isCollection(item)
-  ? _.isEmpty(item) === value : false
+let Empty = (item, value) =>
+  _.isArrayLike(item) ? _.isEmpty(item) === value : false
 
 let Eq = _.isEqual
 let Ne = _.negate(Eq)
@@ -52,7 +68,7 @@ class Interpreter extends Visitor {
 
     if (ctx.tail) {
       ctx.tail.forEach(filter => {
-        result = B.either(result, this.visit(filter))
+        result = Either(result, this.visit(filter))
       })
     }
 
@@ -64,7 +80,7 @@ class Interpreter extends Visitor {
 
     if (ctx.tail) {
       ctx.tail.forEach(filter => {
-        result = B.both(result, this.visit(filter))
+        result = Both(result, this.visit(filter))
       })
     }
 
@@ -72,8 +88,7 @@ class Interpreter extends Visitor {
   }
 
   atomic(ctx) {
-    let over = fn => fn
-    if (ctx.Not) over = fn => _.negate(fn)
+    let over = !ctx.Not ? _.identity : _.negate
     if (ctx.filter) return over(this.visit(ctx.filter))
     if (ctx.parenGroup) return over(this.visit(ctx.parenGroup))
   }
@@ -84,16 +99,15 @@ class Interpreter extends Visitor {
 
   filter(ctx) {
     let path = this.visit(ctx.path)
-    let predicateOf = (match) => (obj) => match(_.get(obj, path))
+    let predicateOf = match => obj => match(_.get(obj, path))
 
-    let map = {
+    let [key] = findOp(ctx, {
       matchBoolean: true,
       matchValue: true,
       matchSet: true,
       matchRegex: true,
-    }
+    })
 
-    let [key] = B.findOp(map, key => !!ctx[key])
     if (!key) return Exists(path)
     return predicateOf(this.visit(ctx[key]))
   }
@@ -117,7 +131,7 @@ class Interpreter extends Visitor {
   }
 
   matchRegex(ctx) {
-    let [ head, ...pattern ] = ctx.RegexLiteral[0].image.split("/")
+    let [head, ...pattern] = ctx.RegexLiteral[0].image.split("/")
     let re = new RegExp(...pattern)
     return item => re.test(item)
   }
@@ -148,34 +162,25 @@ class Interpreter extends Visitor {
     return _.find(map, (val, key) => !!ctx[key])
   }
 
-  logical(ctx) {
-    let map = { And, Or }
-    return _.find(map, (val, key) => !!ctx[key])
-  }
-
   boolean(ctx) {
     return !!ctx.True
   }
 
   value(ctx) {
-    let map = {
+    let [key] = findOp(ctx, {
       literal: true,
       boolean: true,
       array: true,
-    }
-
-    let [key] = B.findOp(map, key => !!ctx[key])
+    })
     if (!key) return null
     return this.visit(ctx[key])
   }
 
   literal(ctx) {
-    let map = {
+    let [key, fn] = findOp(ctx, {
       StringLiteral: item => parseString(item[0].image),
       NumberLiteral: item => Number(item[0].image),
-    }
-
-    let [key, fn] = B.findOp(map, key => !!ctx[key])
+    })
     if (!key) return null
     return fn(ctx[key])
   }

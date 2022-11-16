@@ -3,46 +3,44 @@ let chevrotain = require("chevrotain")
 let { Lexer } = chevrotain
 let grammar = require("./grammar")
 
-let type = (val) => {
-  return val === null
-    ? 'Null'
-    : val === undefined
-      ? 'Undefined'
-      : Object.prototype.toString.call(val).slice(8, -1);
+let type = val => {
+  if (val === null) return "Null"
+  if (val === undefined) return "Undefined"
+  return Object.prototype.toString.call(val).slice(8, -1)
 }
 
 let identifierName = "Identifier"
 let keywordGroup = "Keywords"
 
-let isKeyword = categories => _.some(categories, category => category.name === keywordGroup)
+let isKeyword = categories => _.some(categories, { name: keywordGroup })
 
-let createToken = (categories, identifier) => obj => {
-  let config = obj
+let identifierToken = chevrotain.createToken({
+  name: identifierName,
+  pattern: grammar[identifierName],
+})
+
+let createToken = categories => obj => {
+  let config = { categories }
   if (isKeyword(categories)) {
-    config.longer_alt = identifier
+    config.longer_alt = identifierToken
   }
-  let token = chevrotain.createToken(config)
-  _.forEach(categories, category => token.CATEGORIES.push(category))
-  return token
+  return chevrotain.createToken({
+    ...obj,
+    ...config,
+  })
 }
 
-let getToken = (categories, identifier) => (value, name) => {
-  let tokenOf = createToken(categories, identifier)
+let getToken = categories => (value, name) => {
+  let tokenOf = createToken(categories)
 
   if (type(value) === "Object" && !value.pattern) {
     let categoryToken = tokenOf({ name, pattern: Lexer.NA })
-    let tokens = _.flatMap(
-      value,
-      getToken([ ...categories, categoryToken ], identifier)
-    )
-    return [
-      categoryToken,
-      ...tokens,
-    ]
+    let tokens = _.flatMap(value, getToken([...categories, categoryToken]))
+    return [categoryToken, ...tokens]
   }
 
   if (name === identifierName) {
-    return identifier || tokenOf({ name, pattern: value })
+    return identifierToken
   }
 
   switch (type(value)) {
@@ -54,17 +52,9 @@ let getToken = (categories, identifier) => (value, name) => {
   }
 }
 
-let identifierToken = getToken([], null)(grammar[identifierName], identifierName)
-// console.log(type(grammar[identifierName])identifierToken)
-let mapFn = getToken([], identifierToken)
-let tokenList = _.flatMap(grammar, mapFn)
-// console.log(tokenList)
+let tokenList = _.flatMap(grammar, getToken([]))
 
 let lexer = new Lexer(tokenList)
 lexer.tokens = tokenList
-lexer.map = _.reduce(
-  tokenList,
-  (map, token) => _.assign(map, { [token.name]: token }),
-  {}
-)
+lexer.map = _.keyBy(tokenList, "name")
 module.exports = lexer

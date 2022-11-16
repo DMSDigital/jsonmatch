@@ -8,7 +8,10 @@ let json = {
   age: 30,
 }
 
-console.log(33, match(`!(@["string-key"])`)(json))
+console.log(
+  33,
+  match(`@.firstname in ['Bob', 'Jane'] && @.surname == 'Smith'`)(json),
+)
 
 // console.log(parse("@.foo").parseErrors)
 // console.log(parse("@.foo == 1").parseErrors)
@@ -35,7 +38,7 @@ console.log(33, match(`!(@["string-key"])`)(json))
 // console.log(parse(`@['a'] in ['1','2']`))
 // console.log(parse(`@['a']['b']['c'] in ['1','2']`))
 //
-// console.log(parse(`@['a'] == 1 && @['b'] == 2`))
+// console.log(parse(`@['a'] == 1 && @['b'] == 2 && @['c'] == 2`))
 // console.log(parse(`@['a'] == 1 || @['b'] == 2`))
 //
 // console.log(parse(`@['a'] =~ /.*?/i`))
