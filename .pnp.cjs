@@ -337,7 +337,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/dotignore-npm-0.1.2-9213641e37-06bab15e2a.zip/node_modules/dotignore/",\
           "packageDependencies": [\
             ["dotignore", "npm:0.1.2"],\
-            ["minimatch", "npm:3.0.4"]\
+            ["minimatch", "npm:3.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -929,14 +929,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["minimatch", [\
-        ["npm:3.0.4", {\
-          "packageLocation": "./.yarn/cache/minimatch-npm-3.0.4-6e76f51c23-66ac295f8a.zip/node_modules/minimatch/",\
-          "packageDependencies": [\
-            ["minimatch", "npm:3.0.4"],\
-            ["brace-expansion", "npm:1.1.11"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:3.1.2", {\
           "packageLocation": "./.yarn/cache/minimatch-npm-3.1.2-9405269906-c154e56640.zip/node_modules/minimatch/",\
           "packageDependencies": [\
