@@ -38,12 +38,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@babel/runtime-corejs3", [\
-        ["npm:7.20.1", {\
-          "packageLocation": "./.yarn/cache/@babel-runtime-corejs3-npm-7.20.1-41d80197fc-bac1463304.zip/node_modules/@babel/runtime-corejs3/",\
+        ["npm:7.26.10", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-corejs3-npm-7.26.10-e16911a95f-771d986d82.zip/node_modules/@babel/runtime-corejs3/",\
           "packageDependencies": [\
-            ["@babel/runtime-corejs3", "npm:7.20.1"],\
-            ["core-js-pure", "npm:3.26.1"],\
-            ["regenerator-runtime", "npm:0.13.11"]\
+            ["@babel/runtime-corejs3", "npm:7.26.10"],\
+            ["core-js-pure", "npm:3.41.0"],\
+            ["regenerator-runtime", "npm:0.14.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -271,10 +271,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["core-js-pure", [\
-        ["npm:3.26.1", {\
-          "packageLocation": "./.yarn/unplugged/core-js-pure-npm-3.26.1-d78c7431c6/node_modules/core-js-pure/",\
+        ["npm:3.41.0", {\
+          "packageLocation": "./.yarn/unplugged/core-js-pure-npm-3.41.0-0f3d5b7906/node_modules/core-js-pure/",\
           "packageDependencies": [\
-            ["core-js-pure", "npm:3.26.1"]\
+            ["core-js-pure", "npm:3.41.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1083,10 +1083,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["regenerator-runtime", [\
-        ["npm:0.13.11", {\
-          "packageLocation": "./.yarn/cache/regenerator-runtime-npm-0.13.11-90bf536060-27481628d2.zip/node_modules/regenerator-runtime/",\
+        ["npm:0.14.1", {\
+          "packageLocation": "./.yarn/cache/regenerator-runtime-npm-0.14.1-a6c97c609a-9f57c93277.zip/node_modules/regenerator-runtime/",\
           "packageDependencies": [\
-            ["regenerator-runtime", "npm:0.13.11"]\
+            ["regenerator-runtime", "npm:0.14.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1410,7 +1410,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/xregexp-npm-5.1.1-8c09d80b68-b7fee45db0.zip/node_modules/xregexp/",\
           "packageDependencies": [\
             ["xregexp", "npm:5.1.1"],\
-            ["@babel/runtime-corejs3", "npm:7.20.1"]\
+            ["@babel/runtime-corejs3", "npm:7.26.10"]\
           ],\
           "linkType": "HARD"\
         }]\
