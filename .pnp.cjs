@@ -909,10 +909,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["js-yaml", [\
-        ["npm:3.14.1", {\
-          "packageLocation": "./.yarn/cache/js-yaml-npm-3.14.1-b968c6095e-bef146085f.zip/node_modules/js-yaml/",\
+        ["npm:3.14.2", {\
+          "packageLocation": "./.yarn/cache/js-yaml-npm-3.14.2-debd9d20c3-626fc20773.zip/node_modules/js-yaml/",\
           "packageDependencies": [\
-            ["js-yaml", "npm:3.14.1"],\
+            ["js-yaml", "npm:3.14.2"],\
             ["argparse", "npm:1.0.10"],\
             ["esprima", "npm:4.0.1"]\
           ],\
@@ -1266,7 +1266,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["tap-parser", "npm:5.4.0"],\
             ["events-to-array", "npm:1.1.2"],\
-            ["js-yaml", "npm:3.14.1"],\
+            ["js-yaml", "npm:3.14.2"],\
             ["readable-stream", "npm:2.3.7"]\
           ],\
           "linkType": "HARD"\
