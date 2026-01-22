@@ -30,7 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["chevrotain", "npm:10.4.1"],\
             ["faucet", "npm:0.0.3"],\
-            ["lodash", "npm:4.17.21"],\
+            ["lodash", "npm:4.17.23"],\
             ["tape", "npm:5.6.1"],\
             ["xregexp", "npm:5.1.1"]\
           ],\
@@ -96,7 +96,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@dextcloud/jsonmatch", "workspace:."],\
             ["chevrotain", "npm:10.4.1"],\
             ["faucet", "npm:0.0.3"],\
-            ["lodash", "npm:4.17.21"],\
+            ["lodash", "npm:4.17.23"],\
             ["tape", "npm:5.6.1"],\
             ["xregexp", "npm:5.1.1"]\
           ],\
@@ -924,6 +924,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
           "packageDependencies": [\
             ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:4.17.23", {\
+          "packageLocation": "./.yarn/cache/lodash-npm-4.17.23-50bdb1c01a-7daad39758.zip/node_modules/lodash/",\
+          "packageDependencies": [\
+            ["lodash", "npm:4.17.23"]\
           ],\
           "linkType": "HARD"\
         }]\
